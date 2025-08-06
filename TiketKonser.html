@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Concert Ticket Sales</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Orbitron", sans-serif;
+      }
+
+      body {
+        color: #e0e0e0;
+        background: #0a0a0a;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        padding: 1.5rem;
+        z-index: 1000;
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+      }
+
+      .navbar ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+      }
+
+      .navbar a {
+        color: #00f0ff;
+        text-decoration: none;
+        font-size: 1.2rem;
+        font-weight: 700;
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+      }
+
+      .navbar a:hover {
+        background: rgba(0, 255, 255, 0.2);
+        transform: scale(1.1);
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+      }
+
+      .hamburger {
+        display: none;
+        cursor: pointer;
+        color: #00f0ff;
+        font-size: 1.8rem;
+      }
+
+      .hero {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: #ffffff;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero h1 {
+        font-size: 5rem;
+        font-weight: 700;
+        text-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+        animation: neonGlow 2s ease-in-out infinite alternate;
+      }
+
+      .hero p {
+        font-size: 1.8rem;
+        font-family: "Roboto", sans-serif;
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        margin-bottom: 2rem;
+      }
+
+      .cta-button {
+        background: linear-gradient(45deg, #00f0ff, #ff00ff);
+        color: #ffffff;
+        padding: 1rem 2.5rem;
+        text-decoration: none;
+        border-radius: 50px;
+        font-size: 1.3rem;
+        font-weight: 700;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+      }
+
+      .cta-button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.7);
+      }
+
+      .section {
+        padding: 5rem 1.5rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        background: rgba(20, 20, 20, 0.9);
+        border-radius: 1rem;
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+        margin-bottom: 2rem;
+      }
+
+      .section h2 {
+        font-size: 2.5rem;
+        color: #00f0ff;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+      }
+
+      .ticket-form form {
+        display: grid;
+        gap: 1.5rem;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .ticket-form input,
+      .ticket-form select {
+        padding: 0.75rem;
+        border: 2px solid #00f0ff;
+        border-radius: 10px;
+        font-size: 1rem;
+        font-family: "Roboto", sans-serif;
+        background: rgba(255, 255, 255, 0.1);
+        color: #b6b6b6;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .ticket-form input:focus,
+      .ticket-form select:focus {
+        outline: none;
+        border-color: #ff00ff;
+        box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+      }
+
+      .countdown {
+        background: rgba(0, 0, 0, 0.8);
+        color: #ffffff;
+        text-align: center;
+        padding: 4rem 1.5rem;
+        border-radius: 1rem;
+      }
+
+      .countdown-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+        max-width: 600px;
+        margin: 1.5rem auto;
+      }
+
+      .countdown-item {
+        background: linear-gradient(45deg, #00f0ff, #ff00ff);
+        padding: 1.5rem;
+        border-radius: 50%;
+        font-size: 1.8rem;
+        font-weight: 700;
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+      }
+
+      .gallery img {
+        width: 100%;
+        border-radius: 10px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        filter: brightness(0.8);
+      }
+
+      .gallery img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+        filter: brightness(1);
+      }
+
+      .testimonials {
+        background: rgba(20, 20, 20, 0.9);
+        text-align: center;
+      }
+
+      .testimonial-carousel {
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .testimonial {
+        display: none;
+        padding: 1.5rem;
+        font-size: 1.3rem;
+        font-family: "Roboto", sans-serif;
+        color: #e0e0e0;
+        text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+      }
+
+      .testimonial.active {
+        display: block;
+        animation: slideIn 0.8s ease;
+      }
+
+      .pricing table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: "Roboto", sans-serif;
+      }
+
+      .pricing th,
+      .pricing td {
+        border: 2px solid #00f0ff;
+        padding: 1rem;
+        text-align: left;
+        color: #e0e0e0;
+      }
+
+      .pricing th {
+        background: rgba(0, 255, 255, 0.2);
+        color: #ffffff;
+        font-weight: 700;
+      }
+
+      .performers-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+      }
+
+      .performer-card {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 1.5rem;
+        border-radius: 1rem;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .performer-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+      }
+
+      .performer-card h3 {
+        color: #00f0ff;
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .map iframe {
+        width: 100%;
+        max-width: 800px;
+        height: 400px;
+        border: none;
+        border-radius: 1rem;
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+      }
+
+      .newsletter form {
+        display: flex;
+        gap: 1rem;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        text-align: center;
+      }
+
+      .stats-grid div {
+        color: #00f0ff;
+        font-size: 1.8rem;
+        font-weight: 700;
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+      }
+
+      .footer {
+        background: rgba(0, 0, 0, 0.8);
+        color: #e0e0e0;
+        text-align: center;
+        padding: 4rem 1.5rem;
+        border-radius: 1rem 1rem 0 0;
+      }
+
+      .footer a {
+        color: #00f0ff;
+        text-decoration: none;
+        margin: 0 1rem;
+        font-size: 1.1rem;
+        transition: color 0.3s ease;
+      }
+
+      .footer a:hover {
+        color: #ff00ff;
+        text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+      }
+
+      .modal-content {
+        background: rgba(20, 20, 20, 0.9);
+        padding: 2rem;
+        border-radius: 1rem;
+        max-width: 500px;
+        text-align: center;
+        animation: slideUp 0.5s ease;
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+      }
+
+      @keyframes neonGlow {
+        from {
+          text-shadow: 0 0 10px rgba(0, 255, 255, 0.5),
+            0 0 20px rgba(0, 255, 255, 0.3);
+        }
+        to {
+          text-shadow: 0 0 20px rgba(0, 255, 255, 0.8),
+            0 0 30px rgba(0, 255, 255, 0.5);
+        }
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+        50% {
+          box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+        }
+        100% {
+          box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .navbar ul {
+          flex-direction: column;
+          display: none;
+          background: rgba(0, 0, 0, 0.9);
+          padding: 1.5rem;
+          position: absolute;
+          top: 4rem;
+          left: 0;
+          width: 100%;
+        }
+
+        .navbar.active ul {
+          display: flex;
+        }
+
+        .hamburger {
+          display: block;
+        }
+
+        .hero h1 {
+          font-size: 3rem;
+        }
+
+        .hero p {
+          font-size: 1.2rem;
+        }
+
+        .gallery,
+        .performers-grid,
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .countdown-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .ticket-form form {
+          grid-template-columns: 1fr;
+        }
+
+        .map iframe {
+          height: 300px;
+        }
+
+        .cta-button {
+          padding: 0.75rem 1.5rem;
+          font-size: 1.1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="hamburger">☰</div>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#tickets">Tickets</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <section id="home" class="hero">
+      <canvas id="bgCanvas" class="absolute inset-0 z-[-1]"></canvas>
+      <h1 class="animate-neonGlow">Experience the Ultimate Music Festival 2025</h1>
+      <p>Join thousands of fans for an unforgettable night of music and energy!</p>
+      <a href="#tickets" class="cta-button">Buy Tickets Now</a>
+    </section>
+
+    <section id="about" class="section about">
+      <h2>About the Concert</h2>
+      <p>
+        Join us for an electrifying music festival featuring top artists from
+        around the globe. Expect high-energy performances, stunning visuals, and
+        a vibrant community of music lovers.
+      </p>
+    </section>
+
+    <section id="tickets" class="section ticket-form">
+      <h2>Purchase Tickets</h2>
+      <form id="ticketForm">
+        <input type="text" name="full_name" placeholder="Full Name" required />
+        <input type="email" name="email" placeholder="Email Address" required />
+        <select name="ticket_type" required>
+          <option value="" disabled selected>Select Ticket Type</option>
+          <option value="General Admission">General Admission</option>
+          <option value="VIP">VIP</option>
+          <option value="Premium">Premium</option>
+        </select>
+        <input
+          type="number"
+          name="quantity"
+          placeholder="Quantity"
+          min="1"
+          max="10"
+          required
+        />
+        <input
+          type="text"
+          name="promo_code"
+          placeholder="Promo Code (Optional)"
+        />
+        <button type="submit" class="cta-button">Purchase Tickets</button>
+      </form>
+    </section>
+
+    <section id="countdown" class="section countdown">
+      <h2>Countdown to Concert</h2>
+      <div class="countdown-grid">
+        <div class="countdown-item"><span id="days">00</span><br />Days</div>
+        <div class="countdown-item"><span id="hours">00</span><br />Hours</div>
+        <div class="countdown-item">
+          <span id="minutes">00</span><br />Minutes
+        </div>
+        <div class="countdown-item">
+          <span id="seconds">00</span><br />Seconds
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="section gallery">
+      <h2>Gallery</h2>
+      <div class="gallery">
+        <img
+          src="https://images.unsplash.com/photo-1493225457124-fd3d1b2b72f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+          alt="Concert 1"
+        />
+        <img
+          src="https://images.unsplash.com/photo-1506157786151-b8491531f063?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+          alt="Concert 2"
+        />
+        <img
+          src="https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+          alt="Concert 3"
+        />
+      </div>
+    </section>
+
+    <section id="testimonials" class="section testimonials">
+      <h2>Testimonials</h2>
+      <div class="testimonial-carousel">
+        <div class="testimonial active">
+          "The best concert I've ever attended!" - Jane Doe
+        </div>
+        <div class="testimonial">
+          "Unforgettable energy and amazing performances!" - John Smith
+        </div>
+        <div class="testimonial">
+          "VIP tickets were worth every penny!" - Emily Johnson
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" class="section pricing">
+      <h2>Ticket Pricing</h2>
+      <table>
+        <tr>
+          <th>Ticket Type</th>
+          <th>Price</th>
+          <th>Benefits</th>
+        </tr>
+        <tr>
+          <td>General Admission</td>
+          <td>$50</td>
+          <td>Access to main stage</td>
+        </tr>
+        <tr>
+          <td>VIP</td>
+          <td>$100</td>
+          <td>Access to main stage + VIP lounge</td>
+        </tr>
+        <tr>
+          <td>Premium</td>
+          <td>$150</td>
+          <td>VIP benefits + meet-and-greet</td>
+        </tr>
+      </table>
+    </section>
+
+    <section id="performers" class="section performers">
+      <h2>Performers</h2>
+      <div class="performers-grid">
+        <div class="performer-card">
+          <h3>The Electric Vibes</h3>
+          <p>Headlining rock band</p>
+        </div>
+        <div class="performer-card">
+          <h3>Luna Sparks</h3>
+          <p>Pop sensation</p>
+        </div>
+        <div class="performer-card">
+          <h3>DJ Neon</h3>
+          <p>Electronic music maestro</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="event-details" class="section event-details">
+      <h2>Event Details</h2>
+      <p><strong>Location:</strong> Central Arena, Downtown City</p>
+      <p><strong>Date:</strong> December 31, 2025</p>
+      <p><strong>Time:</strong> 8:00 PM</p>
+    </section>
+
+    <section id="map" class="section map">
+      <h2>Concert Location</h2>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.0860581979997!2d-122.41941568468164!3d37.77492977975947!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDQ2JzI5LjciTiAxMjLCsDI1JzA5LjkiVw!5e0!3m2!1sen!2sus!4v1634567891234"
+        allowfullscreen
+      ></iframe>
+    </section>
+
+    <section id="newsletter" class="section newsletter">
+      <h2>Subscribe to Updates</h2>
+      <form id="newsletterForm">
+        <input type="email" name="email" placeholder="Email Address" required />
+        <button type="submit" class="cta-button">Subscribe</button>
+      </form>
+    </section>
+
+    <section id="promo" class="section promo">
+      <h2>Promo Code</h2>
+      <p>
+        Enter your promo code in the ticket purchase form to get exclusive
+        discounts!
+      </p>
+    </section>
+
+    <section id="stats" class="section stats">
+      <h2>Our Stats</h2>
+      <div class="stats-grid">
+        <div><strong>50,000+</strong><br />Attendees</div>
+        <div><strong>25+</strong><br />Concerts Held</div>
+        <div><strong>100+</strong><br />Artists Performed</div>
+      </div>
+    </section>
+
+    <footer id="contact" class="footer">
+      <p>Email: info@concert2025.com | Phone: +123-456-7890</p>
+      <div>
+        <a href="https://twitter.com/concert2025">Twitter</a>
+        <a href="https://instagram.com/concert2025">Instagram</a>
+        <a href="https://facebook.com/concert2025">Facebook</a>
+      </div>
+      <p>© 2025 Concert Festival. All rights reserved.</p>
+    </footer>
+
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <h2>Purchase Confirmation</h2>
+        <p id="modalMessage">
+          Thank you for your purchase! You will be redirected to WhatsApp to
+          confirm your order.
+        </p>
+        <button onclick="closeModal()" class="cta-button">Close</button>
+      </div>
+    </div>
+
+    <script>
+      // Hamburger menu toggle
+      document.querySelector(".hamburger").addEventListener("click", () => {
+        document.querySelector(".navbar").classList.toggle("active");
+      });
+
+      // Three.js background animation
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+      );
+      const renderer = new THREE.WebGLRenderer({
+        canvas: document.getElementById("bgCanvas"),
+        alpha: true,
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+
+      const geometry = new THREE.BufferGeometry();
+      const vertices = [];
+      for (let i = 0; i < 1000; i++) {
+        vertices.push(
+          Math.random() * 200 - 100,
+          Math.random() * 200 - 100,
+          Math.random() * 200 - 100
+        );
+      }
+      geometry.setAttribute(
+        "position",
+        new THREE.Float32BufferAttribute(vertices, 3)
+      );
+      const material = new THREE.PointsMaterial({
+        color: 0x00f0ff,
+        size: 0.5,
+        transparent: true,
+        opacity: 0.5,
+      });
+      const particles = new THREE.Points(geometry, material);
+      scene.add(particles);
+      camera.position.z = 100;
+
+      function animate() {
+        requestAnimationFrame(animate);
+        particles.rotation.y += 0.002;
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+      });
+
+      // Countdown timer
+      const targetDate = new Date("2025-12-31T20:00:00").getTime();
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("days").textContent = days
+          .toString()
+          .padStart(2, "0");
+        document.getElementById("hours").textContent = hours
+          .toString()
+          .padStart(2, "0");
+        document.getElementById("minutes").textContent = minutes
+          .toString()
+          .padStart(2, "0");
+        document.getElementById("seconds").textContent = seconds
+          .toString()
+          .padStart(2, "0");
+      }
+      setInterval(updateCountdown, 1000);
+
+      // Testimonial carousel
+      let currentTestimonial = 0;
+      const testimonials = document.querySelectorAll(".testimonial");
+      function showTestimonial(index) {
+        testimonials.forEach((t) => t.classList.remove("active"));
+        testimonials[index].classList.add("active");
+        currentTestimonial = (index + 1) % testimonials.length;
+      }
+      setInterval(() => showTestimonial(currentTestimonial), 5000);
+      showTestimonial(0);
+
+      // Ticket form submission to WhatsApp
+      document.getElementById("ticketForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const fullName = formData.get("full_name");
+        const email = formData.get("email");
+        const ticketType = formData.get("ticket_type");
+        const quantity = formData.get("quantity");
+        const promoCode = formData.get("promo_code") || "None";
+
+        const message = `New Ticket Order:\nName: ${fullName}\nEmail: ${email}\nTicket Type: ${ticketType}\nQuantity: ${quantity}\nPromo Code: ${promoCode}`;
+        const whatsappNumber = "6282314137274";
+        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+          message
+        )}`;
+
+        document.getElementById(
+          "modalMessage"
+        ).textContent = `Thank you, ${fullName}! Your order for ${quantity} ${ticketType} ticket(s) will be sent via WhatsApp.`;
+        document.getElementById("modal").style.display = "flex";
+
+        setTimeout(() => {
+          window.open(whatsappUrl, "_blank");
+          document.getElementById("modal").style.display = "none";
+          e.target.reset();
+        }, 2000);
+      });
+
+      // Newsletter form submission
+      document
+        .getElementById("newsletterForm")
+        .addEventListener("submit", (e) => {
+          e.preventDefault();
+          document.getElementById("modalMessage").textContent =
+            "Thank you for subscribing!";
+          document.getElementById("modal").style.display = "flex";
+          e.target.reset();
+        });
+
+      // Modal close
+      function closeModal() {
+        document.getElementById("modal").style.display = "none";
+      }
+
+      // Scroll animations
+      const sections = document.querySelectorAll(".section");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.style.opacity = 1;
+              entry.target.style.transform = "translateY(0)";
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+
+      sections.forEach((section) => {
+        section.style.opacity = 0;
+        section.style.transform = "translateY(30px)";
+        section.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+        observer.observe(section);
+      });
+    </script>
+  </body>
+</html>
