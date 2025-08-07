@@ -128,7 +128,146 @@
         text-align: center;
         text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
       }
+      .upcoming-concerts {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
 
+      .concert-card {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 1rem;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        border: 2px solid transparent;
+      }
+
+      .concert-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+        border: 2px solid #00f0ff;
+      }
+
+      .concert-image {
+        width: 100%;
+        height: 200px;
+        background: linear-gradient(135deg, #00f0ff, #ff00ff);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        color: white;
+        font-weight: bold;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .concert-image::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="white" opacity="0.3"/><circle cx="80" cy="30" r="1.5" fill="white" opacity="0.4"/><circle cx="40" cy="70" r="1" fill="white" opacity="0.5"/><circle cx="90" cy="80" r="2.5" fill="white" opacity="0.3"/></svg>');
+        animation: sparkle 3s ease-in-out infinite;
+      }
+
+      .concert-info {
+        padding: 1.5rem;
+      }
+
+      .concert-title {
+        font-size: 1.5rem;
+        color: #00f0ff;
+        margin-bottom: 0.5rem;
+        font-weight: 700;
+      }
+
+      .concert-date {
+        color: #ff00ff;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+      }
+
+      .concert-location {
+        color: #e0e0e0;
+        margin-bottom: 1rem;
+        font-family: "Roboto", sans-serif;
+      }
+
+      .concert-bands {
+        margin-bottom: 1rem;
+      }
+
+      .concert-bands h4 {
+        color: #00f0ff;
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .band-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .band-tag {
+        background: rgba(0, 240, 255, 0.2);
+        color: #00f0ff;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        border: 1px solid #00f0ff;
+        font-family: "Roboto", sans-serif;
+        transition: all 0.3s ease;
+      }
+
+      .band-tag:hover {
+        background: rgba(0, 240, 255, 0.4);
+        transform: scale(1.05);
+      }
+
+      .concert-price {
+        color: #ffff00;
+        font-size: 1.3rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        text-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+      }
+
+      .status-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        z-index: 10;
+      }
+
+      .available {
+        background: rgba(0, 255, 0, 0.2);
+        color: #00ff00;
+        border: 1px solid #00ff00;
+        box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+      }
+
+      .coming-soon {
+        background: rgba(255, 165, 0, 0.2);
+        color: #ffa500;
+        border: 1px solid #ffa500;
+        box-shadow: 0 0 10px rgba(255, 165, 0, 0.3);
+      }
+
+      .sold-out {
+        background: rgba(255, 0, 0, 0.2);
+        color: #ff0000;
+        border: 1px solid #ff0000;
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+      }
       .ticket-form form {
         display: grid;
         gap: 1.5rem;
@@ -322,6 +461,7 @@
         text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
       }
 
+      
       .modal {
         display: none;
         position: fixed;
@@ -470,10 +610,153 @@
         a vibrant community of music lovers.
       </p>
     </section>
+    <section id="upcoming" class="section">
+      <h2>Upcoming Concerts</h2>
+      <div class="upcoming-concerts">
+        <!-- Concert 1 -->
+        <div class="concert-card">
+          <div class="status-badge available">TICKETS AVAILABLE</div>
+          <div class="concert-image">🎸 ROCK FEST</div>
+          <div class="concert-info">
+            <div class="concert-title">Ultimate Rock Festival 2025</div>
+            <div class="concert-date">📅 December 31, 2025 | 8:00 PM</div>
+            <div class="concert-location">📍 Central Arena, Downtown City</div>
+            <div class="concert-bands">
+              <h4>Performing Artists:</h4>
+              <div class="band-list">
+                <span class="band-tag">The Electric Vibes</span>
+                <span class="band-tag">Luna Sparks</span>
+                <span class="band-tag">DJ Neon</span>
+                <span class="band-tag">Thunder Strike</span>
+              </div>
+            </div>
+            <div class="concert-price">From $50</div>
+            <button class="cta-button" onclick="selectConcert('Ultimate Rock Festival 2025')">Buy Tickets</button>
+          </div>
+        </div>
 
-    <section id="tickets" class="section ticket-form">
+        <!-- Concert 2 -->
+        <div class="concert-card">
+          <div class="status-badge available">TICKETS AVAILABLE</div>
+          <div class="concert-image">🎵 POP NIGHT</div>
+          <div class="concert-info">
+            <div class="concert-title">Pop Stars Mega Concert</div>
+            <div class="concert-date">📅 January 15, 2026 | 7:30 PM</div>
+            <div class="concert-location">📍 Grand Stadium, Music District</div>
+            <div class="concert-bands">
+              <h4>Performing Artists:</h4>
+              <div class="band-list">
+                <span class="band-tag">Stella Nova</span>
+                <span class="band-tag">The Harmonics</span>
+                <span class="band-tag">Dream Waves</span>
+                <span class="band-tag">Echo Chamber</span>
+              </div>
+            </div>
+            <div class="concert-price">From $75</div>
+            <button class="cta-button" onclick="selectConcert('Pop Stars Mega Concert')">Buy Tickets</button>
+          </div>
+        </div>
+
+        <!-- Concert 3 -->
+        <div class="concert-card">
+          <div class="status-badge coming-soon">COMING SOON</div>
+          <div class="concert-image">🎛️ EDM RAVE</div>
+          <div class="concert-info">
+            <div class="concert-title">Electronic Dance Marathon</div>
+            <div class="concert-date">📅 February 20, 2026 | 9:00 PM</div>
+            <div class="concert-location">📍 Warehouse District, Club Zone</div>
+            <div class="concert-bands">
+              <h4>Performing Artists:</h4>
+              <div class="band-list">
+                <span class="band-tag">Bass Drop</span>
+                <span class="band-tag">Neon Pulse</span>
+                <span class="band-tag">Cyber Funk</span>
+                <span class="band-tag">Digital Dreams</span>
+              </div>
+            </div>
+            <div class="concert-price">From $60</div>
+            <button class="cta-button" onclick="showComingSoon()">Notify Me</button>
+          </div>
+        </div>
+
+        <!-- Concert 4 -->
+        <div class="concert-card">
+          <div class="status-badge available">TICKETS AVAILABLE</div>
+          <div class="concert-image">🎺 JAZZ NIGHT</div>
+          <div class="concert-info">
+            <div class="concert-title">Smooth Jazz Evening</div>
+            <div class="concert-date">📅 March 10, 2026 | 8:30 PM</div>
+            <div class="concert-location">📍 Blue Note Hall, Arts Quarter</div>
+            <div class="concert-bands">
+              <h4>Performing Artists:</h4>
+              <div class="band-list">
+                <span class="band-tag">Miles Away</span>
+                <span class="band-tag">Smooth Operators</span>
+                <span class="band-tag">Jazz Collective</span>
+                <span class="band-tag">Blue Monday</span>
+              </div>
+            </div>
+            <div class="concert-price">From $85</div>
+            <button class="cta-button" onclick="selectConcert('Smooth Jazz Evening')">Buy Tickets</button>
+          </div>
+        </div>
+
+        <!-- Concert 5 -->
+        <div class="concert-card">
+          <div class="status-badge coming-soon">COMING SOON</div>
+          <div class="concert-image">🎼 ORCHESTRA</div>
+          <div class="concert-info">
+            <div class="concert-title">Classical Symphony Night</div>
+            <div class="concert-date">📅 April 5, 2026 | 7:00 PM</div>
+            <div class="concert-location">📍 Symphony Hall, Culture Center</div>
+            <div class="concert-bands">
+              <h4>Performing Artists:</h4>
+              <div class="band-list">
+                <span class="band-tag">City Orchestra</span>
+                <span class="band-tag">Chamber Ensemble</span>
+                <span class="band-tag">String Quartet</span>
+                <span class="band-tag">Piano Virtuoso</span>
+              </div>
+            </div>
+            <div class="concert-price">From $95</div>
+            <button class="cta-button" onclick="showComingSoon()">Notify Me</button>
+          </div>
+        </div>
+
+        <!-- Concert 6 -->
+        <div class="concert-card">
+          <div class="status-badge available">TICKETS AVAILABLE</div>
+          <div class="concert-image">🌍 WORLD</div>
+          <div class="concert-info">
+            <div class="concert-title">World Music Festival</div>
+            <div class="concert-date">📅 May 18, 2026 | 6:00 PM</div>
+            <div class="concert-location">📍 Open Air Park, Festival Grounds</div>
+            <div class="concert-bands">
+              <h4>Performing Artists:</h4>
+              <div class="band-list">
+                <span class="band-tag">Global Rhythms</span>
+                <span class="band-tag">Ethnic Fusion</span>
+                <span class="band-tag">Desert Winds</span>
+                <span class="band-tag">Cultural Beats</span>
+              </div>
+            </div>
+            <div class="concert-price">From $55</div>
+            <button class="cta-button" onclick="selectConcert('World Music Festival')">Buy Tickets</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<section id="tickets" class="section ticket-form">
       <h2>Purchase Tickets</h2>
       <form id="ticketForm">
+        <select name="concert_event" id="concertSelect" required>
+          <option value="" disabled selected>Select Concert Event</option>
+          <option value="Ultimate Rock Festival 2025">Ultimate Rock Festival 2025 - Dec 31</option>
+          <option value="Pop Stars Mega Concert">Pop Stars Mega Concert - Jan 15</option>
+          <option value="Smooth Jazz Evening">Smooth Jazz Evening - Mar 10</option>
+          <option value="World Music Festival">World Music Festival - May 18</option>
+        </select>
         <input type="text" name="full_name" placeholder="Full Name" required />
         <input type="email" name="email" placeholder="Email Address" required />
         <select name="ticket_type" required>
@@ -500,6 +783,7 @@
         <button type="submit" class="cta-button">Purchase Tickets</button>
       </form>
     </section>
+
 
     <section id="countdown" class="section countdown">
       <h2>Countdown to Concert</h2>
