@@ -15,7 +15,6 @@
         font-family: "Orbitron", sans-serif;
       }
 
-      
       body {
         color: #e0e0e0;
         background: #100c3e;
@@ -34,7 +33,6 @@
         box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
       }
       
-
       .navbar ul {
         list-style: none;
         display: flex;
@@ -131,6 +129,7 @@
         text-align: center;
         text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
       }
+
       .upcoming-concerts {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -271,6 +270,7 @@
         border: 1px solid #ff0000;
         box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
       }
+
       .ticket-form form {
         display: grid;
         gap: 1.5rem;
@@ -323,23 +323,69 @@
         animation: pulse 2s ease-in-out infinite;
       }
 
-      .gallery {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
+      .artist-gallery {
+        padding: 5rem 1.5rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        background: rgba(20, 20, 20, 0.9);
+        border-radius: 1rem;
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+        text-align: center;
       }
 
-      .gallery img {
+      .artist-carousel {
         width: 100%;
-        border-radius: 10px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        filter: brightness(0.8);
+        max-width: 1200px;
+        margin: 0 auto;
+        overflow: hidden;
+        position: relative;
+        height: 400px;
       }
 
-      .gallery img:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
-        filter: brightness(1);
+      .artist-slide-container {
+        display: flex;
+        width: calc(200% * 2); /* Double the slides for seamless loop */
+        animation: slide 20s linear infinite;
+      }
+
+      .artist-slide {
+        flex: 0 0 calc(100% / 8); /* 8 slides per set */
+        height: 100%;
+        padding: 0 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .artist-slide img {
+        width: 100%;
+        height: 80%;
+        object-fit: cover;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+      }
+
+      .artist-caption {
+        color: #00f0ff;
+        font-size: 1.2rem;
+        font-weight: 700;
+        padding: 0.5rem;
+        background: rgba(0, 0, 0, 0.7);
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        margin-top: 0.5rem;
+        text-align: center;
+        width: 100%;
+        border-radius: 5px;
+      }
+
+      @keyframes slide {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%); /* Move half the container width */
+        }
       }
 
       .testimonials {
@@ -464,7 +510,6 @@
         text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
       }
 
-      
       .modal {
         display: none;
         position: fixed;
@@ -561,7 +606,6 @@
           font-size: 1.2rem;
         }
 
-        .gallery,
         .performers-grid,
         .stats-grid {
           grid-template-columns: 1fr;
@@ -583,6 +627,104 @@
           padding: 0.75rem 1.5rem;
           font-size: 1.1rem;
         }
+
+        .promo {
+          background-color: #141313;
+          padding: 30px;
+          border-radius: 12px;
+          box-shadow: 0 4px 10px rgba(70, 10, 10, 0.1);
+          max-width: 700px;
+          margin: 40px auto;
+          font-family: Arial, sans-serif;
+        }
+
+        .promo h2 {
+          text-align: center;
+          color: #00f0ff;
+          margin-bottom: 10px;
+        }
+
+        .promo p {
+          text-align: center;
+          color: #ffffff;
+          margin-bottom: 20px;
+        }
+
+        table {
+          width: 100%;
+          margin-bottom: 10px;
+          border-collapse: collapse;
+          margin-left: 1px;
+        }
+
+        th, td {
+          padding: 10px;
+          text-align: left;
+        }
+
+        th {
+          background-color: #141414e7;
+          color: #00f0f9d8;
+          width: 40%;
+          border-radius: 6px 0 0 6px;
+        }
+
+        td input[type="text"] {
+          width: 100%;
+          padding: 8px;
+          border: 1px solid #00ccff;
+          border-radius: 4px;
+          font-size: 14px;
+        }
+
+        td input[type="text"]:focus {
+          outline: none;
+          border-color: #00ccff;
+          box-shadow: 0 0 12px #00ccff;
+        }
+
+        button {
+          padding: 10px 20px;
+          background: linear-gradient(135deg, #00d9ff, #cc01ff);
+          color: white;
+          font-weight: bold;
+          border: none;
+          border-radius: 6px;
+          cursor: pointer;
+          transition: background 0.3s ease-in-out, transform 0.2s;
+          box-shadow: 0 4px 8px rgba(3, 234, 255, 0.638);
+        }
+
+        button:hover {
+          background: linear-gradient(135deg, #00d5ff, #d400ff);
+          transform: scale(1.05);
+        }
+
+        .artist-carousel {
+          height: 300px;
+        }
+
+        .artist-caption {
+          font-size: 1rem;
+        }
+
+        .artist-slide {
+          flex: 0 0 calc(100% / 4); /* Show 4 slides at a time */
+        }
+      }
+
+      @media (max-width: 480px) {
+        .artist-carousel {
+          height: 250px;
+        }
+
+        .artist-caption {
+          font-size: 0.8rem;
+        }
+
+        .artist-slide {
+          flex: 0 0 calc(100% / 2); /* Show 2 slides at a time */
+        }
       }
     </style>
   </head>
@@ -599,7 +741,6 @@
     </nav>
 
     <section id="home" class="hero">
-   
       <h1 class="animate-neonGlow">Experience the Ultimate Music Festival 2025</h1>
       <p>Join thousands of fans for an unforgettable night of music and energy!</p>
       <a href="#tickets" class="cta-button">Buy Tickets Now</a>
@@ -613,16 +754,17 @@
         a vibrant community of music lovers.
       </p>
     </section>
+
     <section id="upcoming" class="section">
       <h2>Upcoming Concerts</h2>
       <div class="upcoming-concerts">
         <!-- Concert 1 -->
         <div class="concert-card">
           <div class="status-badge available">TICKETS AVAILABLE</div>
-          <div class="concert-image">🎸 ROCK FEST</div>
+          <div class="concert-image">🎸 ROCK FEST 2025</div>
           <div class="concert-info">
             <div class="concert-title">Ultimate Rock Festival 2025</div>
-            <div class="concert-date">📅 December 31, 2025 | 8:00 PM</div>
+            <div class="concert-date">📅 December 07, 2025 | 9:45 PM</div>
             <div class="concert-location">📍 Central Arena, Downtown City</div>
             <div class="concert-bands">
               <h4>Performing Artists:</h4>
@@ -750,12 +892,12 @@
       </div>
     </section>
 
-<section id="tickets" class="section ticket-form">
+    <section id="tickets" class="section ticket-form">
       <h2>Purchase Tickets</h2>
       <form id="ticketForm">
         <select name="concert_event" id="concertSelect" required>
           <option value="" disabled selected>Select Concert Event</option>
-          <option value="Ultimate Rock Festival 2025">Ultimate Rock Festival 2025 - Dec 31</option>
+          <option value="Ultimate Rock Festival 2025">Ultimate Rock Festival 2025 - Dec 07</option>
           <option value="Pop Stars Mega Concert">Pop Stars Mega Concert - Jan 15</option>
           <option value="Smooth Jazz Evening">Smooth Jazz Evening - Mar 10</option>
           <option value="World Music Festival">World Music Festival - May 18</option>
@@ -768,7 +910,6 @@
           <option value="VIP">VIP</option>
           <option value="Premium">Premium</option>
           <option value="Pr">Pr</option>
-          
         </select>
         <input
           type="number"
@@ -787,7 +928,6 @@
       </form>
     </section>
 
-
     <section id="countdown" class="section countdown">
       <h2>Countdown to Concert</h2>
       <div class="countdown-grid">
@@ -802,21 +942,77 @@
       </div>
     </section>
 
-    <section id="gallery" class="section gallery">
-      <h2>Gallery</h2>
-      <div class="gallery">
-        <img
-          src="https://images.unsplash.com/photo-1493225457124-fd3d1b2b72f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-          alt="Concert 1"
-        />
-        <img
-          src="https://images.unsplash.com/photo-1506157786151-b8491531f063?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-          alt="Concert 2"
-        />
-        <img
-          src="https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-          alt="Concert 3"
-        />
+    <section id="gallery" class="section artist-gallery">
+      <h2>Artist Gallery</h2>
+      <div class="artist-carousel">
+        <div class="artist-slide-container">
+          <!-- First set of slides -->
+          <div class="artist-slide">
+            <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="The Electric Vibes">
+            <div class="artist-caption">The Electric Vibes</div>
+          </div>
+          <div class="artist-slide">
+            <img src="https://images.unsplash.com/photo-1493225457124-fd3d1b2b72f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Luna Sparks">
+            <div class="artist-caption">Luna Sparks</div>
+          </div>
+          <div class="artist-slide">
+            <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="DJ Neon">
+            <div class="artist-caption">DJ Neon</div>
+          </div>
+          <div class="artist-slide">
+            <img src="https://images.unsplash.com/photo-1483032469466-b937c425697b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Stella Nova">
+            <div class="artist-caption">Stella Nova</div>
+          </div>
+          <div class="artist-slide">
+            <img src="https://images.unsplash.com/photo-1511671786161-30e6b6a6d8a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Thunder Strike">
+            <div class="artist-caption">Thunder Strike</div>
+          </div>
+          <div class="artist-slide">
+            <img src="https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="The Harmonics">
+            <div class="artist-caption">The Harmonics</div>
+          </div>
+          <div class="artist-slide">
+            <img src="https://images.unsplash.com/photo-1492681290082-e932765939e6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Dream Waves">
+            <div class="artist-caption">Dream Waves</div>
+          </div>
+          <div class="artist-slide">
+            <img src="https://images.unsplash.com/photo-1514327605112-b887c0e61c0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Echo Chamber">
+            <div class="artist-caption">Echo Chamber</div>
+          </div>
+          <!-- Duplicate set for seamless loop -->
+          <div class="artist-slide">
+            <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="The Electric Vibes">
+            <div class="artist-caption">The Electric Vibes</div>
+          </div>
+          <div class="artist-slide">
+            <img src="https://images.unsplash.com/photo-1493225457124-fd3d1b2b72f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Luna Sparks">
+            <div class="artist-caption">Luna Sparks</div>
+          </div>
+          <div class="artist-slide">
+            <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="DJ Neon">
+            <div class="artist-caption">DJ Neon</div>
+          </div>
+          <div class="artist-slide">
+            <img src="https://images.unsplash.com/photo-1483032469466-b937c425697b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Stella Nova">
+            <div class="artist-caption">Stella Nova</div>
+          </div>
+          <div class="artist-slide">
+            <img src="https://images.unsplash.com/photo-1511671786161-30e6b6a6d8a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Thunder Strike">
+            <div class="artist-caption">Thunder Strike</div>
+          </div>
+          <div class="artist-slide">
+            <img src="https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="The Harmonics">
+            <div class="artist-caption">The Harmonics</div>
+          </div>
+          <div class="artist-slide">
+            <img src="https://images.unsplash.com/photo-1492681290082-e932765939e6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Dream Waves">
+            <div class="artist-caption">Dream Waves</div>
+          </div>
+          <div class="artist-slide">
+            <img src="https://images.unsplash.com/photo-1514327605112-b887c0e61c0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Echo Chamber">
+            <div class="artist-caption">Echo Chamber</div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -908,6 +1104,19 @@
         Enter your promo code in the ticket purchase form to get exclusive
         discounts!
       </p>
+      <form>
+        <table border="1" cellpadding="8" cellspacing="0">
+          <tr>
+            <th>Promo Code</th>
+            <td><input type="text" name="promo" required /></td>
+          </tr>
+          <tr>
+            <td colspan="2" style="text-align: center;">
+              <button type="submit">Apply</button>
+            </td>
+          </tr>
+        </table>
+      </form>
     </section>
 
     <section id="stats" class="section stats">
@@ -946,56 +1155,6 @@
         document.querySelector(".navbar").classList.toggle("active");
       });
 
-      // Three.js background animation
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(
-        75,
-        window.innerWidth / window.innerHeight,
-        0.1,
-        1000
-      );
-      const renderer = new THREE.WebGLRenderer({
-        canvas: document.getElementById("bgCanvas"),
-        alpha: true,
-      });
-      renderer.setSize(window.innerWidth, window.innerHeight);
-
-      const geometry = new THREE.BufferGeometry();
-      const vertices = [];
-      for (let i = 0; i < 1000; i++) {
-        vertices.push(
-          Math.random() * 200 - 100,
-          Math.random() * 200 - 100,
-          Math.random() * 200 - 100
-        );
-      }
-      geometry.setAttribute(
-        "position",
-        new THREE.Float32BufferAttribute(vertices, 3)
-      );
-      const material = new THREE.PointsMaterial({
-        color: 0x00f0ff,
-        size: 0.5,
-        transparent: true,
-        opacity: 0.5,
-      });
-      const particles = new THREE.Points(geometry, material);
-      scene.add(particles);
-      camera.position.z = 100;
-
-      function animate() {
-        requestAnimationFrame(animate);
-        particles.rotation.y += 0.002;
-        renderer.render(scene, camera);
-      }
-      animate();
-
-      window.addEventListener("resize", () => {
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-      });
-
       // Countdown timer
       const targetDate = new Date("2025-12-31T20:00:00").getTime();
       function updateCountdown() {
@@ -1024,13 +1183,15 @@
       setInterval(updateCountdown, 1000);
 
       // Testimonial carousel
-      let currentTestimonial = 0;
       const testimonials = document.querySelectorAll(".testimonial");
+      let currentTestimonial = 0;
+
       function showTestimonial(index) {
         testimonials.forEach((t) => t.classList.remove("active"));
         testimonials[index].classList.add("active");
         currentTestimonial = (index + 1) % testimonials.length;
       }
+
       setInterval(() => showTestimonial(currentTestimonial), 5000);
       showTestimonial(0);
 
@@ -1098,6 +1259,19 @@
         section.style.transition = "opacity 0.8s ease, transform 0.8s ease";
         observer.observe(section);
       });
+
+      // Select concert function
+      function selectConcert(concertName) {
+        const select = document.getElementById("concertSelect");
+        select.value = concertName;
+      }
+
+      // Show coming soon notification
+      function showComingSoon() {
+        document.getElementById("modalMessage").textContent =
+          "This concert is coming soon! We'll notify you when tickets are available.";
+        document.getElementById("modal").style.display = "flex";
+      }
     </script>
   </body>
 </html>
