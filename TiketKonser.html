@@ -581,6 +581,16 @@
     color: #00bff9d8;
     width: 40%;
     border-radius: 6px 0 0 6px;
+    text-align: center;
+    font-size: 30px;
+
+     /* Font gradient */
+    background: linear-gradient(135deg, #00d9ff, #cc01ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent; /* fallback untuk browser yang tidak support */
+    filter: drop-shadow(0 0 5px #0066ff);
   }
 
   td input[type="text"] {
@@ -589,6 +599,7 @@
     border: 1px solid #00ccff;
     border-radius: 4px;
     font-size: 14px;
+    filter: drop-shadow(0 0 5px #00d9ff);
   }
 
   td input[type="text"]:focus {
@@ -599,12 +610,13 @@
 
   /* Button styling */
   button {
-  padding: 10px 20px;
+  padding: 17px 70px;
   background: linear-gradient(135deg, #00d9ff, #cc01ff); /* Gradien ungu ke pink */
   color: white;
   font-weight: bold;
   border: none;
-  border-radius: 6px;
+  font-size: 20px;
+  border-radius: 2100px;
   cursor: pointer;
   transition: background 0.3s ease-in-out, transform 0.2s;
   box-shadow: 0 4px 8px rgba(3, 234, 255, 0.638); /* sedikit glow */
