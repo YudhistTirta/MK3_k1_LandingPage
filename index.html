@@ -7,7 +7,7 @@
 
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap");
-      
+
       * {
         margin: 0;
         padding: 0;
@@ -15,7 +15,6 @@
         font-family: "Orbitron", sans-serif;
       }
 
-      
       body {
         color: #e0e0e0;
         background: #100c3e;
@@ -33,7 +32,6 @@
         z-index: 1000;
         box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
       }
-      
 
       .navbar ul {
         list-style: none;
@@ -68,7 +66,10 @@
 
       .hero {
         height: 100vh;
-        background: linear-gradient(rgba(10, 10, 35, 0.7), rgba(10, 10, 35, 0.7)),
+        background: linear-gradient(
+            rgba(10, 10, 35, 0.7),
+            rgba(10, 10, 35, 0.7)
+          ),
           url("https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80")
             no-repeat center/cover;
         display: flex;
@@ -168,7 +169,7 @@
       }
 
       .concert-image::before {
-        content: '';
+        content: "";
         position: absolute;
         width: 100%;
         height: 100%;
@@ -464,7 +465,6 @@
         text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
       }
 
-      
       .modal {
         display: none;
         position: fixed;
@@ -534,102 +534,111 @@
       }
 
       .promo {
-    background-color: #000000;
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 20px;
-        }
+        background-color: #000000;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 20px;
+      }
 
-        /* Section styling */
-  .promo {
-    background-color: #141313;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(70, 10, 10, 0.1);
-    max-width: 1200px;
-    margin: 40px auto; /* Biar center di halaman */
-    font-family: Arial, sans-serif;
-  }
+      /* Section styling */
+      .promo {
+        background-color: #141313;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(70, 10, 10, 0.1);
+        max-width: 1200px;
+        margin: 40px auto; /* Biar center di halaman */
+        font-family: Arial, sans-serif;
+      }
 
-  .promo h2 {
-    text-align: center;
-    color: #00f0ff;
-    margin-bottom: 10px;
-  }
+      .promo h2 {
+        text-align: center;
+        color: #00f0ff;
+        margin-bottom: 10px;
+      }
 
-  .promo p {
-    text-align: center;
-    color: #ffffff;
-    margin-bottom: 20px;
-  }
+      .promo p {
+        text-align: center;
+        color: #ffffff;
+        margin-bottom: 20px;
+      }
 
-  /* Table styling */
-  table {
-    width: 100%;
-    margin-bottom: 10px;
-    border-collapse: collapse;
-    margin-left: 1px;
-  }
+      /* Table styling */
+      table {
+        width: 100%;
+        margin-bottom: 10px;
+        border-collapse: collapse;
+        margin-left: 1px;
+      }
 
-  th, td {
-    padding: 10px;
-    text-align: left;
-  }
+      th,
+      td {
+        padding: 10px;
+        text-align: left;
+      }
 
-  th {
-    background-color: #141414e7;
-    color: #00bff9d8;
-    width: 40%;
-    border-radius: 6px 0 0 6px;
-    text-align: center;
-    font-size: 30px;
+      th {
+        background-color: #141414e7;
+        color: #00bff9d8;
+        width: 40%;
+        border-radius: 6px 0 0 6px;
+        text-align: center;
+        font-size: 30px;
 
-     /* Font gradient */
-    background: linear-gradient(135deg, #00d9ff, #cc01ff);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent; /* fallback untuk browser yang tidak support */
-    filter: drop-shadow(0 0 5px #0066ff);
-  }
+        /* Font gradient */
+        background: linear-gradient(135deg, #00d9ff, #cc01ff);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent; /* fallback untuk browser yang tidak support */
+        filter: drop-shadow(0 0 5px #0066ff);
+      }
 
-  td input[type="text"] {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #00ccff;
-    border-radius: 4px;
-    font-size: 14px;
-    filter: drop-shadow(0 0 5px #00d9ff);
-  }
+      td input[type="text"] {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #00ccff;
+        border-radius: 4px;
+        font-size: 14px;
+        filter: drop-shadow(0 0 5px #00d9ff);
+      }
 
-  td input[type="text"]:focus {
-  outline: none; /* Hilangkan garis biru default */
-  border-color: #00ccff;
-  box-shadow: 0 0 12px #00ccff;
-  }
+      td input[type="text"]:focus {
+        outline: none; /* Hilangkan garis biru default */
+        border-color: #00ccff;
+        box-shadow: 0 0 12px #00ccff;
+      }
 
-  /* Button styling */
-  button {
-  padding: 17px 70px;
-  background: linear-gradient(135deg, #00d9ff, #cc01ff); /* Gradien ungu ke pink */
-  color: white;
-  font-weight: bold;
-  border: none;
-  font-size: 20px;
-  border-radius: 2100px;
-  cursor: pointer;
-  transition: background 0.3s ease-in-out, transform 0.2s;
-  box-shadow: 0 4px 8px rgba(3, 234, 255, 0.638); /* sedikit glow */
-}
+      /* Button styling */
+      button {
+        padding: 17px 70px;
+        background: linear-gradient(
+          135deg,
+          #00d9ff,
+          #cc01ff
+        ); /* Gradien ungu ke pink */
+        color: white;
+        font-weight: bold;
+        border: none;
+        font-size: 20px;
+        border-radius: 2100px;
+        cursor: pointer;
+        transition: background 0.3s ease-in-out, transform 0.2s;
+        box-shadow: 0 4px 8px rgba(3, 234, 255, 0.638); /* sedikit glow */
+      }
 
-button:hover {
-  background: linear-gradient(135deg, #00d5ff, #d400ff); /* versi lebih gelap saat hover */
-  transform: scale(1.05); /* efek membesar sedikit */
-}
+      button:hover {
+        background: linear-gradient(
+          135deg,
+          #00d5ff,
+          #d400ff
+        ); /* versi lebih gelap saat hover */
+        transform: scale(1.05); /* efek membesar sedikit */
+      }
 
-  button:hover {
-    background-color: #0d1f0e;
-  }
+      button:hover {
+        background-color: #0d1f0e;
+      }
 
       @media (max-width: 768px) {
         .navbar ul {
@@ -682,6 +691,26 @@ button:hover {
           font-size: 1.1rem;
         }
       }
+
+      /* animation tiket purchase */
+      @keyframes ticketFly {
+        0% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(1.2) translateY(-50px);
+          opacity: 0.8;
+        }
+        100% {
+          transform: scale(0.5) translateY(-100px);
+          opacity: 0;
+        }
+      }
+
+      .ticket-fly {
+        animation: ticketFly 1s forwards;
+      }
     </style>
   </head>
   <body>
@@ -697,9 +726,12 @@ button:hover {
     </nav>
 
     <section id="home" class="hero">
-   
-      <h1 class="animate-neonGlow">Experience the Ultimate Music Festival 2025</h1>
-      <p>Join thousands of fans for an unforgettable night of music and energy!</p>
+      <h1 class="animate-neonGlow">
+        Experience the Ultimate Music Festival 2025
+      </h1>
+      <p>
+        Join thousands of fans for an unforgettable night of music and energy!
+      </p>
       <a href="#tickets" class="cta-button">Buy Tickets Now</a>
     </section>
 
@@ -732,7 +764,12 @@ button:hover {
               </div>
             </div>
             <div class="concert-price">From $50</div>
-            <button class="cta-button" onclick="selectConcert('Ultimate Rock Festival 2025')">Buy Tickets</button>
+            <button
+              class="cta-button"
+              onclick="selectConcert('Ultimate Rock Festival 2025')"
+            >
+              Buy Tickets
+            </button>
           </div>
         </div>
 
@@ -754,7 +791,12 @@ button:hover {
               </div>
             </div>
             <div class="concert-price">From $75</div>
-            <button class="cta-button" onclick="selectConcert('Pop Stars Mega Concert')">Buy Tickets</button>
+            <button
+              class="cta-button"
+              onclick="selectConcert('Pop Stars Mega Concert')"
+            >
+              Buy Tickets
+            </button>
           </div>
         </div>
 
@@ -776,7 +818,9 @@ button:hover {
               </div>
             </div>
             <div class="concert-price">From $60</div>
-            <button class="cta-button" onclick="showComingSoon()">Notify Me</button>
+            <button class="cta-button" onclick="showComingSoon()">
+              Notify Me
+            </button>
           </div>
         </div>
 
@@ -798,7 +842,12 @@ button:hover {
               </div>
             </div>
             <div class="concert-price">From $85</div>
-            <button class="cta-button" onclick="selectConcert('Smooth Jazz Evening')">Buy Tickets</button>
+            <button
+              class="cta-button"
+              onclick="selectConcert('Smooth Jazz Evening')"
+            >
+              Buy Tickets
+            </button>
           </div>
         </div>
 
@@ -820,7 +869,9 @@ button:hover {
               </div>
             </div>
             <div class="concert-price">From $95</div>
-            <button class="cta-button" onclick="showComingSoon()">Notify Me</button>
+            <button class="cta-button" onclick="showComingSoon()">
+              Notify Me
+            </button>
           </div>
         </div>
 
@@ -831,7 +882,9 @@ button:hover {
           <div class="concert-info">
             <div class="concert-title">World Music Festival</div>
             <div class="concert-date">📅 May 18, 2026 | 6:00 PM</div>
-            <div class="concert-location">📍 Open Air Park, Festival Grounds</div>
+            <div class="concert-location">
+              📍 Open Air Park, Festival Grounds
+            </div>
             <div class="concert-bands">
               <h4>Performing Artists:</h4>
               <div class="band-list">
@@ -842,21 +895,34 @@ button:hover {
               </div>
             </div>
             <div class="concert-price">From $55</div>
-            <button class="cta-button" onclick="selectConcert('World Music Festival')">Buy Tickets</button>
+            <button
+              class="cta-button"
+              onclick="selectConcert('World Music Festival')"
+            >
+              Buy Tickets
+            </button>
           </div>
         </div>
       </div>
     </section>
 
-<section id="tickets" class="section ticket-form">
+    <section id="tickets" class="section ticket-form">
       <h2>Purchase Tickets</h2>
       <form id="ticketForm">
         <select name="concert_event" id="concertSelect" required>
           <option value="" disabled selected>Select Concert Event</option>
-          <option value="Ultimate Rock Festival 2025">Ultimate Rock Festival 2025 - Dec 31</option>
-          <option value="Pop Stars Mega Concert">Pop Stars Mega Concert - Jan 15</option>
-          <option value="Smooth Jazz Evening">Smooth Jazz Evening - Mar 10</option>
-          <option value="World Music Festival">World Music Festival - May 18</option>
+          <option value="Ultimate Rock Festival 2025">
+            Ultimate Rock Festival 2025 - Dec 31
+          </option>
+          <option value="Pop Stars Mega Concert">
+            Pop Stars Mega Concert - Jan 15
+          </option>
+          <option value="Smooth Jazz Evening">
+            Smooth Jazz Evening - Mar 10
+          </option>
+          <option value="World Music Festival">
+            World Music Festival - May 18
+          </option>
         </select>
         <input type="text" name="full_name" placeholder="Full Name" required />
         <input type="email" name="email" placeholder="Email Address" required />
@@ -866,7 +932,6 @@ button:hover {
           <option value="VIP">VIP</option>
           <option value="Premium">Premium</option>
           <option value="Pr">Pr</option>
-          
         </select>
         <input
           type="number"
@@ -884,7 +949,6 @@ button:hover {
         <button type="submit" class="cta-button">Purchase Tickets</button>
       </form>
     </section>
-
 
     <section id="countdown" class="section countdown">
       <h2>Countdown to Concert</h2>
@@ -1001,27 +1065,26 @@ button:hover {
     </section>
 
     <section id="promo" class="section promo">
-  <h2>Promo Code</h2>
-  <p>
-    Enter your promo code in the ticket purchase form to get exclusive
-    discounts!
-  </p>
+      <h2>Promo Code</h2>
+      <p>
+        Enter your promo code in the ticket purchase form to get exclusive
+        discounts!
+      </p>
 
-  <form>
-    <table border="1" cellpadding="8" cellspacing="0">
-      <tr>
-        <th>Promo Code</th>
-        <td><input type="text" name="promo" required /></td>
-      </tr>
-      <tr>
-        <td colspan="2" style="text-align: center;">
-          <button type="submit">Apply</button>
-        </td>
-      </tr>
-    </table>
-  </form>
-</section>
-
+      <form>
+        <table border="1" cellpadding="8" cellspacing="0">
+          <tr>
+            <th>Promo Code</th>
+            <td><input type="text" name="promo" required /></td>
+          </tr>
+          <tr>
+            <td colspan="2" style="text-align: center">
+              <button type="submit">Apply</button>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </section>
 
     <section id="stats" class="section stats">
       <h2>Our Stats</h2>
@@ -1211,6 +1274,33 @@ button:hover {
         section.style.transition = "opacity 0.8s ease, transform 0.8s ease";
         observer.observe(section);
       });
+
+      //dynamic gradient
+      function setGenreGradient(genre) {
+        const gradients = {
+          rock: "linear-gradient(45deg, #ff0000, #8b0000)",
+          pop: "linear-gradient(45deg, #ff00ff, #9400d3)",
+          jazz: "linear-gradient(45deg, #0000ff, #00ffff)",
+          edm: "linear-gradient(45deg, #00ff00, #ffff00)",
+        };
+        document.documentElement.style.setProperty(
+          "--main-gradient",
+          gradients[genre] || gradients.rock
+        );
+      }
+
+      //update tiket counter
+      // Update ticket counter
+      function updateTicketCounter() {
+        document.querySelectorAll(".concert-card").forEach((card) => {
+          const badge = card.querySelector(".status-badge");
+          if (badge.classList.contains("available")) {
+            const randomTickets = Math.floor(Math.random() * 50) + 5;
+            badge.textContent = `${randomTickets} TICKETS LEFT`;
+          }
+        });
+      }
+      setInterval(updateTicketCounter, 5000);
     </script>
   </body>
 </html>
