@@ -538,6 +538,7 @@ body {
   max-width: 1200px;
   margin: 40px auto; /* Biar center di halaman */
   font-family: Arial, sans-serif;
+  box-shadow: 0 0 30px rgba(7, 129, 129, 0.5);
 }
 
 .promo h2 {
