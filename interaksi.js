@@ -180,3 +180,10 @@ function updateTicketCounter() {
   });
 }
 setInterval(updateTicketCounter, 5000);
+
+// Floating button smooth scroll
+document.querySelector(".floating-button").addEventListener("click", (e) => {
+  e.preventDefault();
+  const ticketsSection = document.getElementById("tickets");
+  ticketsSection.scrollIntoView({ behavior: "smooth" });
+});
