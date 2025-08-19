@@ -103,7 +103,7 @@ document.getElementById("ticketForm").addEventListener("submit", (e) => {
 
   const message = `New Ticket Order:\nName: ${fullName}\nEmail: ${email}\nTicket Type: ${ticketType}\nQuantity: ${quantity}\nPromo Code: ${promoCode}`;
   const whatsappNumber = "6282314137274";
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+  const whatsappUrl = `https://wa.me/${6282314137274}?text=${encodeURIComponent(
     message
   )}`;
 
@@ -118,6 +118,20 @@ document.getElementById("ticketForm").addEventListener("submit", (e) => {
     e.target.reset();
   }, 2000);
 });
+
+// Trigger confetti animation
+  createConfetti();
+
+  document.getElementById(
+    "modalMessage"
+  ).textContent = `Thank you, ${fullName}! Your order for ${quantity} ${ticketType} ticket(s) will be sent via WhatsApp.`;
+  document.getElementById("modal").style.display = "flex";
+
+  setTimeout(() => {
+    window.open(whatsappUrl, "_blank");
+    document.getElementById("modal").style.display = "none";
+    e.target.reset();
+  }, 2000);
 
 // Newsletter form submission
 document.getElementById("newsletterForm").addEventListener("submit", (e) => {
