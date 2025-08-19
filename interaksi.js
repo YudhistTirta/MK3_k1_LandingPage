@@ -3,6 +3,29 @@ document.querySelector(".hamburger").addEventListener("click", () => {
   document.querySelector(".navbar").classList.toggle("active");
 });
 
+// Custom cursor glow effect
+const cursor = document.createElement("div");
+cursor.classList.add("custom-cursor");
+document.body.appendChild(cursor);
+
+document.addEventListener("mousemove", (e) => {
+  cursor.style.left = `${e.clientX}px`;
+  cursor.style.top = `${e.clientY}px`;
+});
+
+// Handle hover effects for interactive elements
+const interactiveElements = document.querySelectorAll(
+  "a, button, .cta-button, .floating-button, .band-tag"
+);
+interactiveElements.forEach((el) => {
+  el.addEventListener("mouseenter", () => {
+    cursor.classList.add("hover");
+  });
+  el.addEventListener("mouseleave", () => {
+    cursor.classList.remove("hover");
+  });
+});
+
 // Three.js background animation
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
@@ -91,47 +114,62 @@ function showTestimonial(index) {
 setInterval(() => showTestimonial(currentTestimonial), 5000);
 showTestimonial(0);
 
-// Ticket form submission to WhatsApp
 document.getElementById("ticketForm").addEventListener("submit", (e) => {
   e.preventDefault();
   const formData = new FormData(e.target);
-  const fullName = formData.get("full_name");
-  const email = formData.get("email");
-  const ticketType = formData.get("ticket_type");
-  const quantity = formData.get("quantity");
-  const promoCode = formData.get("promo_code") || "None";
+  const fullName = formData.get("full_name")?.trim();
+  const email = formData.get("email")?.trim();
+  const event = formData.get("event")?.trim();
+  const ticketType = formData.get("ticket_type")?.trim();
+  const quantity = formData.get("quantity")?.trim() || "1";
+  const promoCode = formData.get("promo_code")?.trim() || "None";
 
-  const message = `New Ticket Order:\nName: ${fullName}\nEmail: ${email}\nTicket Type: ${ticketType}\nQuantity: ${quantity}\nPromo Code: ${promoCode}`;
+  // Validate required fields
+  if (!fullName || !email || !event || !ticketType) {
+    document.getElementById("modalMessage").textContent =
+      "Please fill in all required fields: Name, Email, Event, and Ticket Type.";
+    document.getElementById("modal").style.display = "flex";
+    return;
+  }
+
+  // Validate email format
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    document.getElementById("modalMessage").textContent =
+      "Please enter a valid email address.";
+    document.getElementById("modal").style.display = "flex";
+    return;
+  }
+
+  // Validate quantity
+  const quantityNum = parseInt(quantity, 10);
+  if (isNaN(quantityNum) || quantityNum < 1) {
+    document.getElementById("modalMessage").textContent =
+      "Please enter a valid quantity (minimum 1).";
+    document.getElementById("modal").style.display = "flex";
+    return;
+  }
+
+  const message = `New Ticket Order:\nEvent: ${event}\nName: ${fullName}\nEmail: ${email}\nTicket Type: ${ticketType}\nQuantity: ${quantity}\nPromo Code: ${promoCode}`;
   const whatsappNumber = "6282314137274";
-  const whatsappUrl = `https://wa.me/${6282314137274}?text=${encodeURIComponent(
-    message
-  )}`;
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
   document.getElementById(
     "modalMessage"
-  ).textContent = `Thank you, ${fullName}! Your order for ${quantity} ${ticketType} ticket(s) will be sent via WhatsApp.`;
+  ).textContent = `Thank you, ${fullName}! Your order for ${quantity} ${ticketType} ticket(s) for ${event} has been submitted. You will be redirected to WhatsApp shortly.`;
   document.getElementById("modal").style.display = "flex";
+
+  // Apply ticket fly animation
+  const ticketForm = document.getElementById("ticketForm");
+  ticketForm.classList.add("ticket-fly");
 
   setTimeout(() => {
     window.open(whatsappUrl, "_blank");
     document.getElementById("modal").style.display = "none";
+    ticketForm.classList.remove("ticket-fly");
     e.target.reset();
   }, 2000);
 });
-
-// Trigger confetti animation
-  createConfetti();
-
-  document.getElementById(
-    "modalMessage"
-  ).textContent = `Thank you, ${fullName}! Your order for ${quantity} ${ticketType} ticket(s) will be sent via WhatsApp.`;
-  document.getElementById("modal").style.display = "flex";
-
-  setTimeout(() => {
-    window.open(whatsappUrl, "_blank");
-    document.getElementById("modal").style.display = "none";
-    e.target.reset();
-  }, 2000);
 
 // Newsletter form submission
 document.getElementById("newsletterForm").addEventListener("submit", (e) => {
